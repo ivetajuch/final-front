@@ -1,7 +1,7 @@
-
-
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import Link from 'next/link';
+import styles from './styles.module.css';
 
 const MainPage = () => {
   const [questions, setQuestions] = useState([]);
@@ -9,7 +9,6 @@ const MainPage = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
-  
     const token = localStorage.getItem('jwtToken');
     if (token) {
       setIsLoggedIn(true);
@@ -37,23 +36,32 @@ const MainPage = () => {
   };
 
   return (
-    <div>
+    <div className={styles.container}>
       {isLoggedIn && (
-        <div>
+        <div className={styles.questionForm}>
           <input
+            className={styles.questionInput}
             type="text"
             value={newQuestion}
             onChange={handleQuestionChange}
             placeholder="Enter your question"
           />
-          <button onClick={postQuestion}>Add Question</button>
+          <button className={styles.addQuestion} onClick={postQuestion}>
+            Add Question
+          </button>
         </div>
       )}
       {questions.map((question) => (
-        <div key={question.id}>
-          <div>{question.text}</div>
-          <div>{question.date}</div>
-          <a href={`/question-page/${question.id}`}>See All Answers</a>
+        <div className={styles.question} key={question.id}>
+          <div>
+            <div className={styles.questionText}>{question.text}</div>
+            <div className={styles.questionDate}>{question.date}</div>
+          </div>
+          <div className={styles.link}>
+            <Link href={`/questions/${question.id}`}>
+              <button className={styles.viewAnswers}>See All Answers</button>
+            </Link>
+          </div>
         </div>
       ))}
     </div>
