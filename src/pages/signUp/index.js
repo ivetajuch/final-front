@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/router';
+import styles from './styles.module.css';
+import Navbar from '../../components/navbar/navbar';
 
 const SignUpForm = () => {
   const router = useRouter();
@@ -41,7 +43,10 @@ const SignUpForm = () => {
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
+      <Navbar />
+  
+    <div className={styles.container}>
+      <form className={styles.signForm} onSubmit={handleSubmit}>
         <div>
           <label>Name:</label>
           <input
@@ -69,9 +74,10 @@ const SignUpForm = () => {
             required
           />
         </div>
-        <button type="submit">Sign Up</button>
+        <button className={styles.button} type="submit">Sign Up</button>
       </form>
-      {successMessage && <p>{successMessage}</p>}
+      {successMessage && <p className={styles.message}>{successMessage}</p>}
+    </div>
     </div>
   );
 };

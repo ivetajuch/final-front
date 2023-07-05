@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/router';
+import styles from './styles.module.css';
+import Navbar from '@/components/navbar/navbar';
 
 const LoginForm = () => {
   const [email, setEmail] = useState('');
@@ -31,7 +33,10 @@ const LoginForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <div>
+      <Navbar/>
+    <div className={styles.container}>
+    <form className={styles.loginForm} onSubmit={handleSubmit}>
       <input
         type="email"
         placeholder="Email"
@@ -44,9 +49,11 @@ const LoginForm = () => {
         value={password}
         onChange={(event) => setPassword(event.target.value)}
       />
-      <button type="submit">Login</button>
-      {successMessage && <p>{successMessage}</p>}
+      <button className={styles.button} type="submit">Login</button>
+      {successMessage && <p className={styles.message}>{successMessage}</p>}
     </form>
+    </div>
+    </div>
   );
 };
 

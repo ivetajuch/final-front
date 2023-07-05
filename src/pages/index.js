@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Link from 'next/link';
 import styles from './styles.module.css';
+import Navbar from '../components/navbar/navbar';
+import Navbar2 from '../components/navbar2/navbar2'
 
 const MainPage = () => {
   const [questions, setQuestions] = useState([]);
@@ -36,7 +38,9 @@ const MainPage = () => {
   };
 
   return (
-    <div className={styles.container}>
+    <div>
+    {isLoggedIn ? <Navbar2 /> : <Navbar />}
+    <div className={styles.container}>    
       {isLoggedIn && (
         <div className={styles.questionForm}>
           <input
@@ -65,7 +69,9 @@ const MainPage = () => {
         </div>
       ))}
     </div>
+    </div>
   );
 };
 
 export default MainPage;
+
